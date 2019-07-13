@@ -14,7 +14,10 @@
 (rf/reg-event-db
   ::place-next-o
   (fn [db _]
-    (assoc-in db [:layout (game/get-best-position (:layout db))] "o")))
+    (let [position (game/get-best-position (:layout db))]
+      (if position
+        (assoc-in db [:layout (game/get-best-position (:layout db))] "o")
+        db))))
 
 (rf/reg-event-db
   ::choose-square

@@ -1,9 +1,20 @@
 (ns tic-tac-toe.game)
 
+(defn get-empty-squares
+  [layout]
+  (->> layout
+       (filter #(not (second %)))
+       (into {})
+       keys))
+
 (defn get-best-position
   [layout]
-  (let [position (rand-int 9)]
-    (if (get layout position)
-      (recur layout)
-      position)))
+  (rand-nth (get-empty-squares layout)))
+
+(defn game-over
+  [layout]
+  (->> layout
+       get-empty-squares
+       count
+       (= 0)))
 
