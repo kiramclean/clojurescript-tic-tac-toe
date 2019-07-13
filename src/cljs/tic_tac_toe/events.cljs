@@ -22,6 +22,4 @@
 (rf/reg-event-db
   ::choose-square
   (fn [db [_ id]]
-    (do
-      (js/setTimeout #(rf/dispatch [::place-next-o]) 300)
-      (assoc-in db [:layout id] "x"))))
+    (game/handle-players-choice db id)))
