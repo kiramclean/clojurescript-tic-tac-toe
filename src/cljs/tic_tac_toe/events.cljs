@@ -14,12 +14,18 @@
 (rf/reg-event-db
   ::place-next-o
   (fn [db _]
-    (let [position (game/get-best-position (:layout db))]
-      (if position
-        (assoc-in db [:layout (game/get-best-position (:layout db))] "o")
-        db))))
+    (if (game/game-over (:layout db))
+      db
+      (let [position (game/get-best-position (:layout db))]
+        (if position
+          (assoc-in db [:layout (game/get-best-position (:layout db))] "o")
+          db)))))
 
 (rf/reg-event-db
   ::choose-square
   (fn [db [_ id]]
-    (game/handle-players-choice db id)))
+    (if (get (:layout db) id)
+      db
+      (do
+        (js/setTimeout #(rf/dispatch [::place-next-o]) 300)
+        (assoc-in db [:layout id] "x")))))

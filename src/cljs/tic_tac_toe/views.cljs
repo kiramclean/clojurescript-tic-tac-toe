@@ -22,7 +22,22 @@
   []
   (let [layout @(rf/subscribe [::subs/layout])]
     (when (game/game-over layout)
-      [:button "New game"])))
+      [:div.new-game
+       [:button {:on-click #(rf/dispatch [::events/initialize-db])}
+        "New game"]])))
+
+(defn message
+  []
+  (let [layout @(rf/subscribe [::subs/layout])
+        winner (game/get-winner layout)
+        game-over (game/game-over layout)]
+    (if game-over
+      [:div.message (if winner
+                      (str winner " wins!")
+                      "Tie!")])))
 
 (defn ui []
-  [board])
+  [:div
+   [board]
+   [message]
+   [reset]])
