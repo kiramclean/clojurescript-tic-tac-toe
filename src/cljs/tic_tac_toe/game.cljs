@@ -69,7 +69,7 @@
                   (get-best-position layout player)
                   player))
 
-(defn- score-move
+(defn- slow-score-move
   [layout current-player score]
   (if (game-over layout)
     (get-score (get-winner layout) current-player score)
@@ -77,7 +77,7 @@
            (get-opponent current-player)
            (* -1 score))))
 
-(def score-move (memoize score-move))
+(def score-move (memoize slow-score-move))
 
 (defn- get-scores
   [layout square-ids player]
