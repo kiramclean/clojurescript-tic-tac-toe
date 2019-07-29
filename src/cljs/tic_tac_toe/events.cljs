@@ -27,5 +27,5 @@
     (if (get (:layout db) id)
       db
       (do
-        (js/setTimeout #(rf/dispatch [::place-next-o]) 300)
+        (js/setTimeout #(rf/dispatch [::place-next-o]) 250)
         (assoc-in db [:layout id] "x")))))
