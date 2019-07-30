@@ -1,6 +1,6 @@
 # tic-tac-toe
 
-A [re-frame](https://github.com/Day8/re-frame) application to play tic tac toe, so I could learn a bit about clojurescript.
+A [re-frame](https://github.com/Day8/re-frame) application to play tic tac toe, so I could learn a bit about clojure(script).
 
 ## Development Mode
 
